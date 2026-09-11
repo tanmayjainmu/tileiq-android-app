@@ -1,0 +1,6 @@
+{
+  "name": "TileIQ Inventory",
+  "description": "AI-Powered Inventory Intelligence & Dead Stock Platform for Tile & Sanitaryware Showrooms",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -118,5 +118,4 @@ This repository includes a standalone web edition located in the `/docs` folder 
 4. Click **Save**.
 5. Within 1-2 minutes, GitHub will give you a live URL:
    `https://<your-username>.github.io/<repo-name>/`
-   *(Alternatively, an automated GitHub Actions workflow is provided in `.github/workflows/deploy-pages.yml` if you choose GitHub Actions as the source).*
-
+   *(Alternatively, an automated GitHub Actions workflow is provided in `.github/workflows/deploy-pages.yml` if you choose GitHub Actions as the source)*.

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TileIQ - Showroom Intelligence & Dead-Stock Platform</title>
+  
+  <!-- PWA & Mobile Meta Tags (iOS & Android) -->
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TileIQ">
+  <link rel="manifest" href="manifest.json">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    
+    <!-- Top Bar -->
+    <header class="top-nav">
+      <div class="brand-area">
+        <div class="logo-icon"><i class="fa-solid fa-shapes"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">TileIQ</span>
+          <span class="brand-tagline">Showroom Intelligence</span>
+        </div>
+      </div>
+      
+      <div class="top-actions">
+        <div class="showroom-badge">
+          <i class="fa-solid fa-store"></i>
+          <span id="headerShowroomName">Gupta Ceramics &amp; Tiles</span>
+        </div>
+        <button class="icon-btn" id="subStatusBtn" title="Subscription Status">
+          <span class="status-indicator active"></span>
+          <i class="fa-solid fa-crown"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Side Navigation (Desktop / PC) -->
+    <aside class="side-nav">
+      <button class="side-item active" data-view="dashboard" onclick="switchTab('dashboard')">
+        <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+      </button>
+      <button class="side-item" data-view="inventory" onclick="switchTab('inventory')">
+        <i class="fa-solid fa-boxes-stacked"></i><span>Inventory</span>
+      </button>
+      <button class="side-item" data-view="quotation" onclick="switchTab('quotation')">
+        <i class="fa-solid fa-calculator"></i><span>Quotation Builder</span>
+        <span class="badge-pill side-badge" id="cartBadgeSide">2</span>
+      </button>
+      <button class="side-item" data-view="subscription" onclick="switchTab('subscription')">
+        <i class="fa-solid fa-gear"></i><span>Settings &amp; License</span>
+      </button>
+      <div class="side-nav-footer">
+        <div class="side-pro-card">
+          <i class="fa-solid fa-crown"></i>
+          <strong>Showroom Pro</strong>
+          <span>License Active</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Container -->
+    <main class="main-content">
+      
+      <!-- VIEW: DASHBOARD -->
+      <section id="view-dashboard" class="view-panel active">
+        <!-- Hero Banner -->
+        <div class="hero-card">
+          <div class="hero-content">
+            <span class="hero-badge"><i class="fa-solid fa-bolt"></i> Dead-Stock Liquidation Engine</span>
+            <h1>Reclaim Frozen Capital from Aging Tiles</h1>
+            <p>Smart clearance recommendations for batches over 90 and 180 days old.</p>
+          </div>
+          <button class="btn btn-primary" onclick="switchTab('inventory', 'deadstock')">
+            <i class="fa-solid fa-tags"></i> Review Dead-Stock
+          </button>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon-wrap icon-emerald">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Total Stock Value</span>
+              <span class="metric-val" id="kpiTotalValue">₹4,85,400</span>
+              <span class="metric-sub text-emerald"><i class="fa-solid fa-arrow-up"></i> 1,640 Boxes in Depot</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-wrap icon-rose">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Dead-Stock At Risk</span>
+              <span class="metric-val" id="kpiDeadStock">₹1,42,800</span>
+              <span class="metric-sub text-rose"><i class="fa-solid fa-triangle-exclamation"></i> 4 Batches &gt; 90 Days</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-wrap icon-indigo">
+              <i class="fa-solid fa-hand-holding-dollar"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Recoverable Capital</span>
+              <span class="metric-val" id="kpiRecoverable">₹1,15,600</span>
+              <span class="metric-sub text-indigo"><i class="fa-solid fa-chart-line"></i> With 15-25% Discount</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-icon-wrap icon-amber">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Monthly Plan</span>
+              <span class="metric-val">₹5,000</span>
+              <span class="metric-sub text-amber"><i class="fa-solid fa-shield-check"></i> Pro Active (Incl. Taxes)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dead Stock Alerts Section -->
+        <div class="section-card">
+          <div class="section-header">
+            <div>
+              <h3><i class="fa-solid fa-fire text-rose"></i> Immediate Action Required</h3>
+              <p class="section-desc">Slow-moving batches incurring warehouse holding costs</p>
+            </div>
+            <button class="btn btn-outline-sm" onclick="switchTab('inventory', 'deadstock')">View All (4)</button>
+          </div>
+          <div class="deadstock-list" id="dashboardDeadStockList">
+            <!-- Dynamic Items -->
+          </div>
+        </div>
+
+        <!-- Quick Action Shortcuts -->
+        <div class="quick-actions-row">
+          <button class="quick-action-card" onclick="switchTab('quotation')">
+            <i class="fa-solid fa-calculator text-indigo"></i>
+            <div>
+              <strong>Create Fast Quotation</strong>
+              <span>Calculate sq ft, GST &amp; WhatsApp PDF</span>
+            </div>
+          </button>
+          <button class="quick-action-card" onclick="openSubscriptionModal()">
+            <i class="fa-solid fa-credit-card text-emerald"></i>
+            <div>
+              <strong>Showroom Pro License</strong>
+              <span>Manage ₹5,000 plan &amp; GPay renewal</span>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- VIEW: INVENTORY -->
+      <section id="view-inventory" class="view-panel">
+        <div class="inventory-controls">
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="tileSearchInput" placeholder="Search by name, size, finish, brand or SKU...">
+          </div>
+          <div class="filter-chips" id="categoryFilterChips">
+            <button class="chip active" data-cat="all">All Tiles</button>
+            <button class="chip" data-cat="deadstock"><i class="fa-solid fa-triangle-exclamation"></i> Dead Stock (&gt;90d)</button>
+            <button class="chip" data-cat="GVT">GVT Vitrified</button>
+            <button class="chip" data-cat="Wall">Ceramic Wall</button>
+            <button class="chip" data-cat="Wood">Wood Planks</button>
+            <button class="chip" data-cat="Outdoor">Anti-Skid Outdoor</button>
+          </div>
+        </div>
+
+        <div class="inventory-count-bar">
+          <span id="inventoryCountText">Showing 6 tiles</span>
+          <button class="btn btn-outline-sm" onclick="openAddTileModal()">
+            <i class="fa-solid fa-plus"></i> Add Tile Batch
+          </button>
+        </div>
+
+        <div class="tiles-grid" id="tilesGrid">
+          <!-- Dynamic Tile Cards -->
+        </div>
+      </section>
+
+      <!-- VIEW: QUOTATION BUILDER -->
+      <section id="view-quotation" class="view-panel">
+        <div class="quotation-layout">
+          
+          <!-- Left: Customer & Items -->
+          <div class="quote-form-column">
+            <div class="section-card">
+              <div class="section-header">
+                <h3><i class="fa-solid fa-user text-indigo"></i> Customer Details</h3>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Client Name *</label>
+                  <input type="text" id="custName" value="Sunil Verma" placeholder="Enter customer name">
+                </div>
+                <div class="form-group">
+                  <label>WhatsApp Phone *</label>
+                  <input type="tel" id="custPhone" value="+91 98234 56789" placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                  <label>Project / Site Location</label>
+                  <input type="text" id="custSite" value="Palm Meadows Villa #42" placeholder="e.g. Master Bathroom, Villa">
+                </div>
+                <div class="form-group">
+                  <label>Payment Terms</label>
+                  <select id="custTerms">
+                    <option value="50% Advance, 50% on Delivery">50% Advance via GPay, 50% on Delivery</option>
+                    <option value="100% Advance Payment">100% Advance Payment</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quote Items Table -->
+            <div class="section-card">
+              <div class="section-header">
+                <h3><i class="fa-solid fa-layer-group text-emerald"></i> Selected Tile Batches</h3>
+                <button class="btn btn-outline-sm" onclick="switchTab('inventory')">
+                  <i class="fa-solid fa-plus"></i> Add from Catalog
+                </button>
+              </div>
+
+              <div id="quoteItemsList" class="quote-items-list">
+                <!-- Cart rows inserted dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Summary & Actions -->
+          <div class="quote-summary-column">
+            <div class="summary-card">
+              <h3>Estimate Summary</h3>
+              <div class="summary-divider"></div>
+              
+              <div class="summary-line">
+                <span>Material Subtotal:</span>
+                <span id="sumSubtotal">₹0</span>
+              </div>
+              <div class="summary-line">
+                <span>Clearance Discount:</span>
+                <span id="sumDiscount" class="text-emerald">- ₹0</span>
+              </div>
+              <div class="summary-line">
+                <span>GST (18% Ceramic Tiles):</span>
+                <span id="sumGst">₹0</span>
+              </div>
+              <div class="summary-line">
+                <span>Freight &amp; Handling:</span>
+                <input type="number" id="sumFreight" value="1200" min="0" step="100" class="mini-input">
+              </div>
+
+              <div class="summary-divider"></div>
+
+              <div class="summary-total-line">
+                <span>Net Payable Amount:</span>
+                <span id="sumNetTotal" class="total-amount">₹0</span>
+              </div>
+              <p class="summary-tax-note">Inclusive of GST &amp; Transit Insurance</p>
+
+              <!-- Actions -->
+              <div class="quote-actions">
+                <button class="btn btn-whatsapp" onclick="shareViaWhatsApp()">
+                  <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+                </button>
+                <button class="btn btn-gpay" onclick="triggerCustomerGPay()">
+                  <i class="fa-solid fa-bolt"></i> Collect Advance via Google Pay (UPI)
+                </button>
+                <button class="btn btn-outline" onclick="showUpiQrModal()">
+                  <i class="fa-solid fa-qrcode"></i> Show Dynamic UPI QR
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VIEW: SUBSCRIPTION & SETTINGS -->
+      <section id="view-subscription" class="view-panel">
+        <div class="settings-card">
+          <div class="plan-hero">
+            <div class="plan-badge">SHOWROOM PRO LICENSE</div>
+            <h2>₹5,000 <span class="plan-period">/ month (All Taxes Included)</span></h2>
+            <p>Complete multi-branch stock intelligence, unlimited customer quotations, and AI dead-stock liquidation recommendations.</p>
+            <div class="plan-perks">
+              <span><i class="fa-solid fa-circle-check text-emerald"></i> Unlimited WhatsApp Quotations</span>
+              <span><i class="fa-solid fa-circle-check text-emerald"></i> Real-time Aging Tile Alerts</span>
+              <span><i class="fa-solid fa-circle-check text-emerald"></i> Google Pay UPI Collect Integration</span>
+              <span><i class="fa-solid fa-circle-check text-emerald"></i> Multi-Staff Warehouse Access</span>
+            </div>
+            
+            <div class="plan-action-box">
+              <button class="btn btn-primary btn-lg" onclick="openSubscriptionModal()">
+                <i class="fa-solid fa-credit-card"></i> Pay ₹5,000 / Renew License via GPay
+              </button>
+            </div>
+          </div>
+
+          <div class="section-card mt-4">
+            <div class="section-header">
+              <h3><i class="fa-solid fa-receipt"></i> Recent License Invoices</h3>
+            </div>
+            <div class="invoice-table-wrap">
+              <table class="invoice-table">
+                <thead>
+                  <tr>
+                    <th>Invoice No.</th>
+                    <th>Date</th>
+                    <th>Billing Cycle</th>
+                    <th>Total (Incl. Tax)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="invoiceTableBody">
+                  <tr>
+                    <td>INV-2026-9042</td>
+                    <td>01 Sep 2026</td>
+                    <td>1 Month Pro</td>
+                    <td>₹5,000</td>
+                    <td><span class="badge-paid">PAID (GPay)</span></td>
+                  </tr>
+                  <tr>
+                    <td>INV-2026-7811</td>
+                    <td>01 Aug 2026</td>
+                    <td>1 Month Pro</td>
+                    <td>₹5,000</td>
+                    <td><span class="badge-paid">PAID (UPI)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Mobile Navigation Bar (iOS & Android friendly) -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="dashboard" onclick="switchTab('dashboard')">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item" data-view="inventory" onclick="switchTab('inventory')">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span>Inventory</span>
+      </button>
+      <button class="nav-item" data-view="quotation" onclick="switchTab('quotation')">
+        <i class="fa-solid fa-calculator"></i>
+        <span class="badge-pill" id="cartBadge">2</span>
+        <span>Quote</span>
+      </button>
+      <button class="nav-item" data-view="subscription" onclick="switchTab('subscription')">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- MODAL: GOOGLE PAY / UPI PAYMENT -->
+    <div id="paymentModal" class="modal-backdrop">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-shield-halved text-indigo"></i> Showroom Pro Renewal</h3>
+          <button class="modal-close" onclick="closeModal('paymentModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="plan-picker">
+            <label class="plan-option active" onclick="selectSubCycle(1, 5000, this)">
+              <input type="radio" name="cycle" checked>
+              <div>
+                <strong>1 Month Pro</strong>
+                <span>₹5,000 (Incl. all taxes)</span>
+              </div>
+            </label>
+            <label class="plan-option" onclick="selectSubCycle(12, 50000, this)">
+              <input type="radio" name="cycle">
+              <div>
+                <strong>1 Year (Save ₹10,000)</strong>
+                <span>₹50,000 (Incl. all taxes)</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-group mt-3">
+            <label>Payer UPI VPA / ID:</label>
+            <input type="text" id="payerUpiIdInput" value="rajesh@okicici" placeholder="name@bank">
+          </div>
+
+          <div class="upi-actions-row">
+            <a id="gpayDeepLink" class="btn btn-gpay full-width" href="#">
+              <i class="fa-solid fa-mobile-screen"></i> Launch Google Pay / UPI App
+            </a>
+          </div>
+
+          <div class="qr-preview-area">
+            <p class="qr-label">Or Scan QR from any UPI App:</p>
+            <img id="subQrImage" class="upi-qr-code" alt="UPI QR" src="">
+            <span class="qr-vpa">Payee: tileiq.licensing@icici (TileIQ Pro)</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" onclick="closeModal('paymentModal')">Cancel</button>
+          <button class="btn btn-primary" onclick="confirmSubscriptionPayment()">Verify &amp; Activate Plan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: DYNAMIC CUSTOMER UPI QR -->
+    <div id="qrModal" class="modal-backdrop">
+      <div class="modal-card text-center">
+        <div class="modal-header">
+          <h3><i class="fa-solid fa-qrcode text-emerald"></i> Collect Quotation Deposit</h3>
+          <button class="modal-close" onclick="closeModal('qrModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p id="qrCustomerInfo">Scan with Google Pay, PhonePe or Paytm:</p>
+          <h2 id="qrAmountDisplay" class="text-emerald my-2">₹0</h2>
+          <img id="customerQrImg" class="upi-qr-code" alt="UPI QR" src="">
+          <p class="text-sm text-gray mt-2">VPA: gupta.ceramics@okhdfcbank</p>
+        </div>
+        <div class="modal-footer justify-center">
+          <button class="btn btn-primary" onclick="closeModal('qrModal')">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast">Action completed successfully</div>
+
+  </div>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

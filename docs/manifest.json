@@ -1,0 +1,21 @@
+{
+  "name": "TileIQ - Showroom Intelligence",
+  "short_name": "TileIQ",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "description": "Ceramic Tile Dead-Stock & Showroom Quotation Platform",
+  "icons": [
+    {
+      "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=192&auto=format&fit=crop",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=512&auto=format&fit=crop",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
